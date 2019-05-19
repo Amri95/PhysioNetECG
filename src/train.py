@@ -23,7 +23,15 @@ def plot_confusion_matrix(y_true, y_pred):
     classes = ['A','N','O','~']
     labels = np.arange(4)
     cm = confusion_matrix(y_pred=y_pred, y_true=y_true, labels=labels)
-    
+
+    ## compute f1 score
+    f1_scores = list()
+    for i, l in enumerate(classes):
+        f1 = 2*cm[i,i] / (np.sum(cm[i,:]) + np.sum(cm[:,i]))
+        f1_scores.append(f1)
+        print("class %s"%l + ", F1:%s"%f1)
+    print("Mean F1 score: %s" % np.mean(f1_scores))
+
     fig, ax = plt.subplots(figsize=(6,6))
     ax = sns.heatmap(cm, annot=True, fmt='g', cmap='Greens', cbar=False)
     ax.set_title('Confusion matrix')
@@ -48,8 +56,8 @@ def plot_loss(history):
     
 def main(ags):
     # load model
-    from models import toy_model
-    model = toy_model()
+    from models import toy_model, resnet
+    model = resnet()
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
     # load data

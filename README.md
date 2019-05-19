@@ -4,5 +4,6 @@ This repository contain the code for the Human Data Analytics project. The goal 
 
 
 ### TO DO
+- [ ] Smarter data preparation: there are records ranging from 3000 to 18000 samples, should consider smaller sequences? For example sequences containing 10 R waves.
+- [ ] Augment data and generate new records for the noise class
 - [ ] ...
-- [ ] To do :)
